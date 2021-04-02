@@ -1,0 +1,35 @@
+body {
+    height: 100vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),  /* 1st image: darkens the page */
+    url("https://images.unsplash.com/photo-1559521783-1d1599583485?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"); /* 2nd image: the actual image*/
+    background-size: cover;                                 /* cover whole page */
+    background-position: center;
+    text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.5);   /* shadows for the text on the page */
+    box-shadow: inset 0 0 5rem rgba(0, 0, 0, 0.5);
+}
+.cover-container {
+  max-width: 60vw;      /* content take up 60 of the view width*/
+}
+
+.nav-link {
+    padding: 0.25rem 0;
+    font-weight: 700;
+    color: rgba(255,255,255,0.5);                  /* 0.5 for slight transparency */
+    margin-left: 1rem;
+    border-bottom: 0.25rem solid transparent;       /* hide the bottom border when it's not hovered over */
+}
+
+.nav-link:hover{                                    /* display a bottom white border when you hover over the navbar links */
+    color: rgba(255,255,255,0.5);                 /* keep the text white by overriding bootstrap */ 
+    border-bottom-color:rgba(255,255,255,0.5);
+}
+
+.nav-link.active {                                  /* for active bottom white border on home*/
+    color: white;
+    border-bottom-color:white;
+}
+
+.btn-secondary, .btn-secondary:hover{          /* button styles */
+    color: #333;
+    text-shadow: none;
+}

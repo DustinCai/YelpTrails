@@ -1,0 +1,26 @@
+<!-- success alert -->
+<% if(success && success.length ) { %>  <!-- only show the alert if success exists and its not empty -->
+    <!-- alert-dismissible fade show allows you to dismiss the alert-->
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <%= success %>  <!-- flashes success message -->
+
+        <!-- button to dismiss alert-->
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            <!-- <span aria-hidden="true">&times;</span> -->
+        </button>
+    </div>
+<% } %>
+
+
+<!-- error alert -->
+<% if(error && error.length ) { %>  <!-- only show the alert if errorr exists and its not empty -->
+    <!-- alert-dismissible fade show allows you to dismiss the alert-->
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <%= error %>  <!-- flashes error message -->
+
+        <!-- button to dismiss alert-->
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            <!-- <span aria-hidden="true">&times;</span> -->
+        </button>
+    </div>
+<% } %>
