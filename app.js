@@ -165,8 +165,9 @@ app.get('/', (req, res) => {
     res.render('home'); 
 }); 
 
-app.listen(3000, () => {
-    console.log('Serving on port 3000'); 
+const port = process.env.PORT || 3000;          // heroku will auto make port set to something, if not (we are in local), use 3000 
+app.listen(port, () => {
+    console.log(`Serving on port ${port}`); 
 });
 
 
