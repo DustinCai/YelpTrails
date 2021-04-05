@@ -1,18 +1,15 @@
 <% layout('/layouts/boilerplate') %> 
 
-<div id="cluster-map"></div>    <!-- for mapbox map -->
+<div id="cluster-map" class="mb-5"></div>    <!-- for mapbox map -->
 
-<h1>All Campgrounds</h1>
-<div>
-    <a href="/campgrounds/new">Add Campground</a>
-</div>
+<h1>All Hiking Trails</h1>
 
-<% for(let campground of campgrounds) { %>
+<% for(let trail of trails) { %>
     <div class="card mb-3">
         <div class="row">
             <div class="col-md-4">
-                <% if(campground.images.length) { %>
-                    <img class="img-fluid" alt="" src="<%= campground.images[0].url %>">
+                <% if(trail.images.length) { %>
+                    <img class="img-fluid" alt="" src="<%= trail.images[0].url %>">
                 <% } else { %>
                     <!-- provide a default image if the user does not upload one, the default image can be found in defaultImages on cloudindary-->
                     <img class="img-fluid" alt="" src="https://res.cloudinary.com/dpdjxknhv/image/upload/v1617314357/YelpCamp/defaultImages/camping-thumbnail.11.4920AM-1_vs6um1.webp" >
@@ -20,12 +17,12 @@
             </div>
             <div class="col-md-8">
                 <div class="card-body">
-                    <h5 class="card-title"> <%= campground.title %> </h5>
-                    <p class="card-text"> <%= campground.description %> </p>
+                    <h5 class="card-title"> <%= trail.title %> </h5>
+                    <p class="card-text"> <%= trail.description %> </p>
                     <p class="card-text"> 
-                        <small class="text-muted"> <%= campground.location %> </small>
+                        <small class="text-muted"> <%= trail.location %> </small>
                     </p>
-                    <a class="btn btn-primary" href="/campgrounds/<%= campground._id %>">View <%= campground.title %></a>
+                    <a class="btn btn-primary" href="/trails/<%= trail._id %>">View <%= trail.title %></a>
                 </div>
             </div>    
         </div>
@@ -35,6 +32,6 @@
 
 <script>
     const mapToken = '<%- process.env.MAPBOX_TOKEN %>';
-    const campgrounds = { features: <%- JSON.stringify(campgrounds) %> }; // mapbox expects an obj with a key of 'features' to an array of data
+    const trails = { features: <%- JSON.stringify(trails) %> }; // mapbox expects an obj with a key of 'features' to an array of data
 </script>
 <script src="/javascripts/clusterMap.js"></script>

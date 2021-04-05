@@ -16,8 +16,8 @@ module.exports.register = async (req, res, next) => {
             if(err) {
                 return next(err);   // if err, go to the next err route
             }
-            req.flash('success', 'Welcome to Yelp camp!');              // flash & redirect the user
-            res.redirect('/campgrounds'); 
+            req.flash('success', 'Welcome to Yelp Trail!');             // flash & redirect the user
+            res.redirect('/trails'); 
         });  
     } catch(e){
         req.flash('error', e.message);      // user with the given username is already registered
@@ -32,7 +32,7 @@ module.exports.renderLogin = (req, res) => {    // get form to login
 }
 module.exports.login = (req, res) => {
     req.flash('success', 'Welcome back!'); 
-    const redirectUrl = req.session.returnTo || '/campgrounds'; // if the user was redirected from a url || they just clicked login, no redirect   
+    const redirectUrl = req.session.returnTo || '/trails';      // if the user was redirected from a url || they just clicked login, no redirect   
     delete req.session.returnTo;                                // remove the original url before we redirect to it    
     res.redirect(redirectUrl); 
 }
@@ -42,5 +42,5 @@ module.exports.login = (req, res) => {
 module.exports.logout = (req, res) => {
     req.logout(); 
     req.flash('success', 'Goodbye!'); 
-    res.redirect('/campgrounds'); 
+    res.redirect('/trails'); 
 }

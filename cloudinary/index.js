@@ -14,7 +14,7 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
     cloudinary: cloudinary, 
     params: {
-        folder: 'YelpCamp', // the folder IN cloudinary that we should store things in    
+        folder: 'YelpTrail', // the folder IN cloudinary that we should store things in    
         allowed_formats: ['jpeg', 'png', 'jpg']
     }
 }); 

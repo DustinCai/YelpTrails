@@ -26,11 +26,11 @@ const extension = (joi) => ({
 // blueprint of our database 
 
 const Joi = BaseJoi.extend(extension); 
-module.exports.campgroundSchema = Joi.object({
+module.exports.trailSchema = Joi.object({
     // using joi methods to define our pattern
-    campground: Joi.object({
+    trail: Joi.object({
         title: Joi.string().required().escapeHTML(), 
-        price: Joi.number().required().min(0), 
+        //price: Joi.number().required().min(0), 
         location: Joi.string().required().escapeHTML(), 
         description: Joi.string().required().escapeHTML(), 
     }).required(), 

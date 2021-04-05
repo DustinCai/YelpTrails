@@ -1,12 +1,12 @@
 <% layout('/layouts/boilerplate') %> 
 
 <div class="row">
-    <h1 class="text-center">Edit Campground</h1> 
+    <h1 class="text-center">Edit Trail</h1> 
     <div class="col-md-6 offset-md-3">
-        <form action="/campgrounds/<%= campground._id %>?_method=PUT" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+        <form action="/trails/<%= trail._id %>?_method=PUT" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
             <div class="mb-3">
                 <label class="form-label" for="title">Title</label>
-                <input class="form-control" type="text" id="title" name="campground[title]" value="<%= campground.title %>" required>
+                <input class="form-control" type="text" id="title" name="trail[title]" value="<%= trail.title %>" required>
                 <div class="valid-feedback">
                     Looks good!
                 </div>
@@ -14,7 +14,7 @@
 
             <div class="mb-3">
                 <label class="form-label" for="location">Location</label>
-                <input class="form-control" type="text" id="location" name="campground[location]" value="<%= campground.location %>" required>
+                <input class="form-control" type="text" id="location" name="trail[location]" value="<%= trail.location %>" required>
                 <div class="valid-feedback">
                     Looks good!
                 </div>
@@ -26,7 +26,7 @@
                 <input type="file" class="form-control" id="formFileMultiple" name="image" multiple >
             </div>
             <div class="mb-3"> <!-- deleting image -->
-                <% campground.images.forEach(function(img, index) { %>
+                <% trail.images.forEach(function(img, index) { %>
                     <img src="<%= img.thumbnail %>" class="img-thumbnail" alt="">
                     <div class="form-check-inline">
                          <!-- any checkbox that was checked, has it's value passed to deleteImages[]-->
@@ -37,29 +37,29 @@
                 <% }) %>
             </div>
 
-            <div class="mb-3">
-                <label class="form-label" for="price">Campground Price</label>
+            <!-- <div class="mb-3">
+                <label class="form-label" for="price">Trail Price</label>
                 <div class="input-group">
                     <span class="input-group-text" id="price">$</span>
-                    <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price" aria-describedby="" name="campground[price]" value="<%= campground.price %>" required>
+                    <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price" aria-describedby="" name="trail[price]" value="<%= trail.price %>" required>
                 </div>
                 <div class="valid-feedback">
                     Looks good!
                 </div>
-            </div>
+            </div> -->
 
             <div class="mb-3">
                 <label class="form-label" for="description">Description</label>
-                <textarea class="form-control" type="text" id="description" name="campground[description]" required> <%= campground.description %> </textarea> <!-- we dont use the val attribute on the textarea, just put between open and close tags-->
+                <textarea class="form-control" type="text" id="description" name="trail[description]" required> <%= trail.description %> </textarea> <!-- we dont use the val attribute on the textarea, just put between open and close tags-->
                 <div class="valid-feedback">
                     Looks good!
                 </div>
             </div>
 
             <div class="mb-3">
-                <button class="btn btn-info">Save Campground</button>
+                <button class="btn btn-info">Save Trail</button>
             </div>
         </form>
-        <a href="/campgrounds/<%= campground._id %>">Back to Campground</a>
+        <a href="/trails/<%= trail._id %>">Back to Trail</a>
     </div>
 </div>

@@ -1,9 +1,11 @@
 const mongoose = require('mongoose'); 
 const cities = require('./cities'); 
-const { places, descriptors } = require('./seedHelpers');  
-const Campground = require('../models/campground'); 
+const { places, descriptors, nouns } = require('./seedHelpers');  
+const Trail = require('../models/trail'); 
 
-mongoose.connect('mongodb://localhost:27017/yelp-camp', {
+const dbUrl = process.env.DB_URL 
+const localDB = 'mongodb://localhost:27017/yelp-trail';           // use for local seeding else process.env.DB_URL
+mongoose.connect(dbUrl, {  // connect db
     userNewUrlParser: true, 
     useCreateIndex: true, 
     useUnifiedTopology: true, 
@@ -21,16 +23,35 @@ const sample = (array) => {
 }
 
 const seedDB = async() => {
-    await Campground.deleteMany({});                            // delete everything in db
-    for(let i = 0; i < 300; i++){                                // then seed 50 new campgrounds 
-        const random1000 = Math.floor(Math.random() * 1000);    // random num to get a random city
-        const price = Math.floor(Math.random() * 30) + 10;
-        const camp = new Campground({
-            author: '6061701c2e957b00e16e58fe', // random user id, check your db
+    await Trail.deleteMany({});                                 // delete everything in trails collection 
+   
+    const images = [                                            // use some default images we already stored in cloudinary
+        {
+            url: 'https://res.cloudinary.com/dpdjxknhv/image/upload/v1617577974/YelpTrail/defaultImages/hiking4_revuzs.jpg',
+            filename: 'YelpTrail/defaultImages/hiking4_revuzs'
+          },
+          {
+            url: 'https://res.cloudinary.com/dpdjxknhv/image/upload/v1617577974/YelpTrail/defaultImages/hiking1_q8eo72.jpg', 
+            filename: 'YelpTrail/defaultImages/hiking1_q8eo72'
+          }, 
+          {
+            url: 'https://res.cloudinary.com/dpdjxknhv/image/upload/v1617577979/YelpTrail/defaultImages/hiking2_llhdlm.jpg', 
+            filename: 'YelpTrail/defaultImages/hiking2_llhdlm'
+          }
+    ]
+
+    const numOfFakeTrails = 100
+    for(let i = 0; i < numOfFakeTrails; i++){                   // then seed new trails 
+        const random1000 = Math.floor(Math.random() * 1000);    // random num to get a random city    
+
+        const trail = new Trail({       
+            // using an already defined user for each seeded trail, switch the objectID depending on which db you are using then reseed
+            // 606a63dddcdcf501ba8ab540 for development         
+            // 606a509795e909012747ef89 for mongodb 
+            author: '606a509795e909012747ef89',         // random user id, check your db  // colt: 6061701c2e957b00e16e58fe
             location: `${cities[random1000].city}, ${cities[random1000].state}`,    // random city 
-            title: `${sample(descriptors)} ${sample(places)}`,                      // random descriptor & place
-            description: "random text random text random text random text random text random text random text random text random text random text random text random text random text ",
-            price: price, 
+            title: `${sample(descriptors)} ${sample(nouns)} ${sample(places)}`,  // random descriptor & place
+            description: `Hiking trail by ${cities[random1000].city}, ${cities[random1000].state}`,
             geometry: { 
                 type: 'Point', 
                 coordinates: [
@@ -38,18 +59,9 @@ const seedDB = async() => {
                     cities[random1000].latitude, 
                 ],     
             }, 
-            images: [       // use some images we already stored in cloudinary
-                {
-                  url: 'https://res.cloudinary.com/dpdjxknhv/image/upload/v1617248493/YelpCamp/vhy6iy9pbd6n4306zxht.png',
-                  filename: 'YelpCamp/vhy6iy9pbd6n4306zxht'
-                },
-                {
-                  url: 'https://res.cloudinary.com/dpdjxknhv/image/upload/v1617248493/YelpCamp/zmmpm8yc18pkb6cmz6uq.jpg',
-                  filename: 'YelpCamp/zmmpm8yc18pkb6cmz6uq'
-                }
-              ]
+            images: images.sort(() => Math.random() - 0.5),     // shuffle the images so the first image will be different
         })
-        await camp.save();  // save the city
+        await trail.save();  // save the trail
     }
 }
 
@@ -61,4 +73,4 @@ seedDB().then(() => {
 
 
 // run this file on it's own separately from our node app any time we want to see our database
-// not that often, really just anytime we make changes to the model or to our data
+// not that often, really just anytime we make changes to the model or to our data: node seeds/index.js

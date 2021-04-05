@@ -15,7 +15,7 @@ ImageSchema.virtual('thumbnail').get(function(){
 });
 
 const opts = { toJSON: { virtuals: true } };    // to get mongoose virtual properties added on the res object
-const CampgroundSchema = new Schema({
+const TrailSchema = new Schema({
     title: String, 
     images: [ ImageSchema ],                // array for multiple images
     geometry: {
@@ -29,7 +29,7 @@ const CampgroundSchema = new Schema({
             required: true 
         }
     },
-    price: Number, 
+    // price: Number, 
     description: String, 
     location: String, 
     author: {
@@ -45,16 +45,16 @@ const CampgroundSchema = new Schema({
 }, opts);
 
 // virtual property for clustermap 
-CampgroundSchema.virtual('properties.popUpMarkup').get(function() {                 // adds a property of 'properties: { popUpMarkup: '...' }'
+TrailSchema.virtual('properties.popUpMarkup').get(function() {                 // adds a property of 'properties: { popUpMarkup: '...' }'
     // for the popup link when you click on a circle on the map     
-    return `<strong><a href="/campgrounds/${this._id}">${this.title}</a></strong>
+    return `<strong><a href="/trails/${this._id}">${this.title}</a></strong>
             <p>${this.description.substring(0, 25)}...</p>`; 
 }); 
 
 
-// post query middleware after a campground model calls findOneAndDelete
-CampgroundSchema.post('findOneAndDelete', async function(doc) { // we have access to whatever has been deleted through doc
-    // delete all reviews associated with a campground that was deleted
+// post query middleware after a trail model calls findOneAndDelete
+TrailSchema.post('findOneAndDelete', async function(doc) { // we have access to whatever has been deleted through doc
+    // delete all reviews associated with a trail that was deleted
     if(doc){                        // if the deleted item was found and deleted
         await Review.deleteMany({   // pass in a query where we delete all reviews where their id field is in our doc.review array
             _id: {                  
@@ -68,4 +68,4 @@ CampgroundSchema.post('findOneAndDelete', async function(doc) { // we have acces
 
 
 // compile model and export it 
-module.exports = mongoose.model('Campground', CampgroundSchema); 
+module.exports = mongoose.model('Trail', TrailSchema); 

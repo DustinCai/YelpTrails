@@ -1,7 +1,8 @@
 body {
     height: 100vh;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),  /* 1st image: darkens the page */
-    url("https://images.unsplash.com/photo-1559521783-1d1599583485?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"); /* 2nd image: the actual image*/
+    /* url("https://images.unsplash.com/photo-1559521783-1d1599583485?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"); */ /* 2nd image: the actual image*/
+    url(https://res.cloudinary.com/dpdjxknhv/image/upload/v1617579514/YelpTrail/defaultImages/hiking-mammoth-mountain_kpmsfj.jpg); 
     background-size: cover;                                 /* cover whole page */
     background-position: center;
     text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.5);   /* shadows for the text on the page */

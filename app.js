@@ -22,13 +22,13 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local'); 
 
 // routes 
-const campgroundRoutes = require('./routes/campgrounds'); 
+const trailRoutes = require('./routes/trails'); 
 const reviewRoutes = require('./routes/reviews'); 
 const userRoutes = require('./routes/users'); 
 
 // databases 
-const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelp-camp';   // process.env.DB_URL for production, localhost for develpoment 
-
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelp-trail';   // process.env.DB_URL for production, localhost for develpoment 
+const developmentDB = 'mongodb://localhost:27017/yelp-trail'; 
 
 mongoose.connect(dbUrl, {  // first parameter is the db to connect to, use dbUrl for mongodb altas (production), developmentUrl for localhost (development)  
     userNewUrlParser: true, 
@@ -158,8 +158,8 @@ app.use((req, res, next) => {
 
 // routes 
 app.use('/', userRoutes); 
-app.use('/campgrounds', campgroundRoutes);
-app.use('/campgrounds/:id/reviews', reviewRoutes); 
+app.use('/trails', trailRoutes);
+app.use('/trails/:id/reviews', reviewRoutes); 
 
 app.get('/', (req, res) => {
     res.render('home'); 
