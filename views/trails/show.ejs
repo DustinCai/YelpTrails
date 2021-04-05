@@ -36,7 +36,6 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item text-muted"> <%= trail.location %> </li>
                 <li class="list-group-item text"> Submitted by <%= trail.author.username %> </li>
-                <!-- <li class="list-group-item">trail.price/night</li> -->
             </ul>
 
             <% if(currentUser && trail.author.equals(currentUser._id)) { %> <!-- if the current logged in user is the same author as the trail-->

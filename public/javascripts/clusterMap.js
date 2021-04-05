@@ -41,18 +41,18 @@ map.on('load', function () {
                 'step',
                 ['get', 'point_count'],
                 '#00BCD4',
-                10,         
+                5,         
                 '#2196F3',
-                30,
+                10,
                 '#3F51B5'
             ],
             'circle-radius': [              // circle size
                 'step',
                 ['get', 'point_count'],
                 15,
-                10,     // any cluster under 10 will be 15 pixels
+                5,      // any cluster under 5 will be 15 pixels
                 20,
-                30,     // any cluster under 30 will be 20 pixels
+                10,     // any cluster under 10 will be 20 pixels
                 25
             ]
         }

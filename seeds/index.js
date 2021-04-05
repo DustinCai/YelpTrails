@@ -3,9 +3,13 @@ const cities = require('./cities');
 const { places, descriptors, nouns } = require('./seedHelpers');  
 const Trail = require('../models/trail'); 
 
-const dbUrl = process.env.DB_URL 
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
+
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelp-trail'; 
 const localDB = 'mongodb://localhost:27017/yelp-trail';           // use for local seeding else process.env.DB_URL
-mongoose.connect(dbUrl, {  // connect db
+mongoose.connect(dbUrl, {  // connect to db
     userNewUrlParser: true, 
     useCreateIndex: true, 
     useUnifiedTopology: true, 
@@ -37,18 +41,22 @@ const seedDB = async() => {
           {
             url: 'https://res.cloudinary.com/dpdjxknhv/image/upload/v1617577979/YelpTrail/defaultImages/hiking2_llhdlm.jpg', 
             filename: 'YelpTrail/defaultImages/hiking2_llhdlm'
+          }, 
+          {
+            url: 'https://res.cloudinary.com/dpdjxknhv/image/upload/v1617598356/YelpTrail/defaultImages/hiking6_lucmw5.jpg', 
+            filename: 'YelpTrail/defaultImages/hiking6_lucmw5', 
           }
     ]
 
-    const numOfFakeTrails = 100
+    const numOfFakeTrails = 70
     for(let i = 0; i < numOfFakeTrails; i++){                   // then seed new trails 
         const random1000 = Math.floor(Math.random() * 1000);    // random num to get a random city    
 
         const trail = new Trail({       
             // using an already defined user for each seeded trail, switch the objectID depending on which db you are using then reseed
-            // 606a63dddcdcf501ba8ab540 for development         
-            // 606a509795e909012747ef89 for mongodb 
-            author: '606a509795e909012747ef89',         // random user id, check your db  // colt: 6061701c2e957b00e16e58fe
+            // 606a63dddcdcf501ba8ab540 for development: user: Dustin          
+            // 606a509795e909012747ef89 for mongodb: user: Dustin
+            author: '606a509795e909012747ef89',                 // random user id, check your db  
             location: `${cities[random1000].city}, ${cities[random1000].state}`,    // random city 
             title: `${sample(descriptors)} ${sample(nouns)} ${sample(places)}`,  // random descriptor & place
             description: `Hiking trail by ${cities[random1000].city}, ${cities[random1000].state}`,
